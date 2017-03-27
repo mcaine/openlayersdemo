@@ -11,11 +11,11 @@
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
     
-    <div class="jumbotron">
-        <div class="row text-center">
+    <!-- <div class="jumbotron"> -->
+        <!-- <div class="row text-center">  -->
             <div id="map" class="map" tabindex="0"></div>
-         </div>
-    </div>
+        <!--  </div> -->
+    <!--</div> -->
     
 </div>
      
@@ -123,23 +123,22 @@
     	}]
       };
       
-      var ordnanceSurveyData = {
-    	'type': 'FeatureCollection',
-    	        'crs': {
-    	          'type': 'name',
-    	          'properties': {
-    	            'name': 'EPSG:27700'
-    	          }
-    	        },
-    	        'features': [{
-    	          'type': 'Feature',
-    	          'geometry': {
-    	            'type': 'Point',
-    	            'coordinates': [537749.85, 177861.19]
-    	          }
-    	        }]
-    		  
-      };
+		var ordnanceSurveyData = {
+    		'type': 'FeatureCollection',
+    		'crs': {
+    			'type': 'name',
+    	    	'properties': {
+    	    		'name': 'EPSG:27700'
+    	    	}
+    		},
+    		'features': [{
+    			'type': 'Feature',
+    	    	'geometry': {
+    	        	'type': 'Point',
+    	        	'coordinates': [537749.85, 177861.19]
+    	     	}
+    		}]
+      	};
 
       var geojsonObject = {
         'type': 'FeatureCollection',
@@ -245,8 +244,6 @@
     	  features: (new ol.format.GeoJSON()).readFeatures(ordnanceSurveyData, {dataProjection:'EPSG:27700', featureProjection:'EPSG:3857'})
       })
 
-      //vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
-
       var vectorLayer = new ol.layer.Vector({
         source: vectorSource,
         style: styleFunction
@@ -267,8 +264,8 @@
           new ol.layer.Tile({
             source: new ol.source.OSM()
           }),
-          vectorLayer,
-          japanVectorLayer,
+//          vectorLayer,
+//          japanVectorLayer,
           ordnanceSurveyVectorLayer
         ],
         target: 'map',
