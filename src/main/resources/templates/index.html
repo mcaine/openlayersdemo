@@ -122,6 +122,24 @@
     		}
     	}]
       };
+      
+      var ordnanceSurveyData = {
+    	'type': 'FeatureCollection',
+    	        'crs': {
+    	          'type': 'name',
+    	          'properties': {
+    	            'name': 'EPSG:27700'
+    	          }
+    	        },
+    	        'features': [{
+    	          'type': 'Feature',
+    	          'geometry': {
+    	            'type': 'Point',
+    	            'coordinates': [537749.85, 177861.19]
+    	          }
+    	        }]
+    		  
+      };
 
       var geojsonObject = {
         'type': 'FeatureCollection',
@@ -216,11 +234,15 @@
     	      };
 
       var vectorSource = new ol.source.Vector({
-        features: (new ol.format.GeoJSON()).readFeatures(featureCollectionObject)
+        features: (new ol.format.GeoJSON()).readFeatures(geojsonObject)
       });
       
       var japanVectorSource = new ol.source.Vector({
     	  features: (new ol.format.GeoJSON()).readFeatures(japanGeoData, {dataProjection:'EPSG:4326', featureProjection:'EPSG:3857'})
+      })
+      
+      var ordnanceSurveyVectorSource = new ol.source.Vector({
+    	  features: (new ol.format.GeoJSON()).readFeatures(ordnanceSurveyData, {dataProjection:'EPSG:27700', featureProjection:'EPSG:3857'})
       })
 
       //vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
@@ -233,7 +255,12 @@
       var japanVectorLayer = new ol.layer.Vector({
           source: japanVectorSource,
           style: styleFunction
-        });
+      });
+      
+      var ordnanceSurveyVectorLayer = new ol.layer.Vector({
+          source: ordnanceSurveyVectorSource,
+          style: styleFunction
+      });
 
       var map = new ol.Map({
         layers: [
@@ -241,7 +268,8 @@
             source: new ol.source.OSM()
           }),
           vectorLayer,
-          japanVectorLayer
+          japanVectorLayer,
+          ordnanceSurveyVectorLayer
         ],
         target: 'map',
         controls: ol.control.defaults({
