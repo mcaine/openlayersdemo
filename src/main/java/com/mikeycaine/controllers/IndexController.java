@@ -7,12 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 	
 	@RequestMapping("/")
-    String index(){
+    String index() {
         return "index";
     }
 	
-	@RequestMapping("/usejson")
-    String usejson(){
-        return "usejson";
+	@RequestMapping("/points")
+    String points() {
+        return "points";
+    }
+	
+	@RequestMapping("/polygons")
+    String polygons() {
+        return "polygons";
     }
 }
