@@ -93,14 +93,12 @@
       var styleFunction = function(feature) {
         return styles[feature.getGeometry().getType()];
       };
-
-      var ordnanceSurveyVectorSource = new ol.source.Vector({
-    	  format: new ol.format.GeoJSON(),
-    	  url: "/polygondata",
-      })
            
-      var ordnanceSurveyVectorLayer = new ol.layer.Vector({
-          source: ordnanceSurveyVectorSource,
+      var polygonVectorLayer = new ol.layer.Vector({
+          source: new ol.source.Vector({
+        	  format: new ol.format.GeoJSON(),
+        	  url: "/polygondata",
+          }),
           style: styleFunction
       });
 
@@ -109,7 +107,7 @@
           new ol.layer.Tile({
             source: new ol.source.OSM()
           }),
-          ordnanceSurveyVectorLayer
+          polygonVectorLayer
         ],
         target: 'map',
         controls: ol.control.defaults({
@@ -118,8 +116,8 @@
           })
         }),
         view: new ol.View({
-          center: [0, 0],
-          zoom: 2
+          center: [15000000, 4700000],
+          zoom: 5
         })
       });
     </script>

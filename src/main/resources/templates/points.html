@@ -94,14 +94,12 @@
       var styleFunction = function(feature) {
         return styles[feature.getGeometry().getType()];
       };
-
-      var ordnanceSurveyVectorSource = new ol.source.Vector({
-    	  format: new ol.format.GeoJSON(),
-    	  url: "/pointdata",
-      })
            
       var ordnanceSurveyVectorLayer = new ol.layer.Vector({
-          source: ordnanceSurveyVectorSource,
+          source: new ol.source.Vector({
+        	  format: new ol.format.GeoJSON(),
+        	  url: "/pointdata",
+          }),
           style: styleFunction
       });
 
@@ -119,8 +117,8 @@
           })
         }),
         view: new ol.View({
-          center: [0, 0],
-          zoom: 2
+          center: [0, 7000000],
+          zoom: 5
         })
       });
     </script>
