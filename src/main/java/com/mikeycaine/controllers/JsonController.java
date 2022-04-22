@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.geotools.factory.FactoryRegistryException;
 import org.geotools.feature.DefaultFeatureCollection;
 import org.geotools.feature.SchemaException;
 import org.geotools.feature.simple.SimpleFeatureBuilder;
@@ -58,8 +59,8 @@ public class JsonController {
 		return jsonFeatureCollectionFromMultiPolygonMap("EPSG:4326", multiPolygonMap);
 	}
 	
-	private Polygon[] japanPolygons() {
-		Double[][][][] data = {
+	private Polygon[] japanPolygons() throws FactoryRegistryException {
+		double[][][][] data = {
 	    				{{{134.638428,34.149234},{134.766379,33.806335},{134.203416,33.201178},{133.79295,33.521985},{133.280268,33.28957},{133.014858,32.704567},
 	      			    {132.363115,32.989382},{132.371176,33.463642},{132.924373,34.060299},{133.492968,33.944621},{133.904106,34.364931},{134.638428,34.149234}}},
 	      			    {{{140.976388,37.142074},{140.59977,36.343983},{140.774074,35.842877},{140.253279,35.138114},{138.975528,34.6676},{137.217599,34.606286},
