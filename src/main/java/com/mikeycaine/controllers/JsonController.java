@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.geotools.factory.FactoryRegistryException;
 import org.geotools.feature.DefaultFeatureCollection;
 import org.geotools.feature.SchemaException;
 import org.geotools.feature.simple.SimpleFeatureBuilder;
@@ -15,6 +14,7 @@ import org.geotools.feature.simple.SimpleFeatureTypeBuilder;
 import org.geotools.geojson.feature.FeatureJSON;
 import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.geotools.referencing.CRS;
+import org.locationtech.jts.geom.*;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.referencing.FactoryException;
@@ -22,13 +22,6 @@ import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.geom.Polygon;
-
 
 @RestController
 public class JsonController {
@@ -59,7 +52,7 @@ public class JsonController {
 		return jsonFeatureCollectionFromMultiPolygonMap("EPSG:4326", multiPolygonMap);
 	}
 	
-	private Polygon[] japanPolygons() throws FactoryRegistryException {
+	private Polygon[] japanPolygons() {
 		double[][][][] data = {
 	    				{{{134.638428,34.149234},{134.766379,33.806335},{134.203416,33.201178},{133.79295,33.521985},{133.280268,33.28957},{133.014858,32.704567},
 	      			    {132.363115,32.989382},{132.371176,33.463642},{132.924373,34.060299},{133.492968,33.944621},{133.904106,34.364931},{134.638428,34.149234}}},
@@ -74,7 +67,7 @@ public class JsonController {
 	      			    {140.312087,43.333273},{141.380549,43.388825},{141.671952,44.772125},{141.967645,45.551483},{143.14287,44.510358},
 	      			    {143.910162,44.1741}}}};
 		
-	    GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory(null);  
+	    org.locationtech.jts.geom.GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory(null);
 	    
 	    List<Polygon> polygonList = new ArrayList<>();
 	    for (int i = 0; i < data.length; ++i) {
