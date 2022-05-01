@@ -52,7 +52,7 @@ public class JsonController {
 		return jsonFeatureCollectionFromMultiPolygonMap("EPSG:4326", multiPolygonMap);
 	}
 	
-	private Polygon[] japanPolygons() {
+	public static Polygon[] japanPolygons() {
 		double[][][][] data = {
 	    				{{{134.638428,34.149234},{134.766379,33.806335},{134.203416,33.201178},{133.79295,33.521985},{133.280268,33.28957},{133.014858,32.704567},
 	      			    {132.363115,32.989382},{132.371176,33.463642},{132.924373,34.060299},{133.492968,33.944621},{133.904106,34.364931},{134.638428,34.149234}}},
@@ -67,7 +67,7 @@ public class JsonController {
 	      			    {140.312087,43.333273},{141.380549,43.388825},{141.671952,44.772125},{141.967645,45.551483},{143.14287,44.510358},
 	      			    {143.910162,44.1741}}}};
 		
-	    org.locationtech.jts.geom.GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory(null);
+	    GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory(null);
 	    
 	    List<Polygon> polygonList = new ArrayList<>();
 	    for (int i = 0; i < data.length; ++i) {
